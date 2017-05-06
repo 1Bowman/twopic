@@ -1,18 +1,44 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Button, Col, Row, Thumbnail } from 'react-bootstrap';
+import * as firebase from 'firebase';
 
 class App extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      name: 'fuckboi'
+    }
+  }
+
+  componentDidMount() {
+    const rootRef = firebase.database().ref()
+    console.log(rootRef.length)
+  }
+
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Row>
+          <Col xsPull={8}>
+            <div>
+              <h1>hello.</h1>
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={6} mdPush={2} md={4}>
+            <Thumbnail src="https://react-bootstrap.github.io/assets/thumbnaildiv.png" alt="242x200">
+              <h3>good job {this.state.name}</h3>
+              <Button>help</Button>
+            </Thumbnail>
+          </Col>
+          <Col xs={6} mdPush={2} md={4}>
+            <Thumbnail src="https://react-bootstrap.github.io/assets/thumbnaildiv.png" alt="242x200">
+              <h3>good job boy</h3>
+              <Button>help</Button>
+            </Thumbnail>
+          </Col>
+        </Row>
       </div>
     );
   }

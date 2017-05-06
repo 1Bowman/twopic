@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
     <!--
       Notice the use of %PUBLIC_URL% in the tag above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -27,5 +28,19 @@
       To begin the development, run `npm start`.
       To create a production bundle, use `npm run build`.
     -->
+
+    <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyAZPoB3Sh_kxQxLL0PTESckR-Xej6XMTpg",
+        authDomain: "twopic-f13bb.firebaseapp.com",
+        databaseURL: "https://twopic-f13bb.firebaseio.com",
+        projectId: "twopic-f13bb",
+        storageBucket: "twopic-f13bb.appspot.com",
+        messagingSenderId: "287134586794"
+      };
+      firebase.initializeApp(config);
+    </script>
   </body>
 </html>
