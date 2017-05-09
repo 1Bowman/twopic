@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Thumbnail } from 'react-bootstrap';
+import { Thumbnail } from 'react-bootstrap';
 import _ from 'lodash';
 
 
@@ -19,7 +19,6 @@ class VotingThumbnail extends Component {
         <Thumbnail src={this.state.picPath}>
           <h3>{this.state.name}</h3>
           <p>{this.state.description}</p>
-          <Button>vote4me</Button>
         </Thumbnail>
       </div>
     )
