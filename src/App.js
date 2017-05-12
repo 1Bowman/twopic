@@ -2,21 +2,22 @@ import React, { Component } from 'react';
 import { Col, Row, Thumbnail } from 'react-bootstrap';
 import _ from 'lodash';
 import VotingThumbnail from './VotingThumbnail'
+
+import * as thumbnailUtil from './thumbnailUtil'
 import * as firebase from 'firebase';
 
 class App extends Component {
   constructor(props){
     super(props)
     this.state = {
-      name: '',
-      peopleList: [],
-      picPath: ''
+      firstThumbnail: {},
+      secondThumbnail: {}
     }
   }
 
   componentDidMount() {
-    const rootRef = firebase.database().ref()
-    const thumbnailRef = rootRef.child('thumbnail')
+    // const rootRef = firebase.database().ref()
+    // const thumbnailRef = rootRef.child('thumbnail')
 
     // const storageRef = firebase.storage().ref();
     // const fileName = '18121094_1499848123390827_3433065930687494666_o.jpg'
@@ -24,12 +25,19 @@ class App extends Component {
 
     // this.setState({picPath: spaceRef.fullPath})
 
-    thumbnailRef.on('value', snap => {
-      console.log('snapval', snap.val())
-      _.map(snap.val(), childVal => {
-        this.setState({peopleList: this.state.peopleList.concat(childVal)})
-      })
-    })
+    // thumbnailRef.on('value', snap => {
+    //   console.log('snapval', snap.val())
+    //   _.map(snap.val(), childVal => {
+    //     this.setState({peopleList: this.state.peopleList.concat(childVal)})
+    //   })
+    // })
+
+    const randomThumbnails = thumbnailUtil.getRandomThumbnail()
+    // this.setState({
+    //   firstThumbnail: randomThumbnails[0],
+    //   secondThumbnail: randomThumbnails[1]
+    // })
+
   }
 
   render() {
