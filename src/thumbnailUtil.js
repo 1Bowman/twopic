@@ -1,7 +1,7 @@
 import * as firebase from 'firebase';
 import _ from 'lodash';
 
-export function getRandomThumbnail(){
+export getRandomThumbnail async function () {
   console.log('inside thumbnailUtil')
 
   const rootRef = firebase.database().ref()
@@ -10,7 +10,6 @@ export function getRandomThumbnail(){
   // const storageRef = firebase.storage().ref();
   // const fileName = '18121094_1499848123390827_3433065930687494666_o.jpg'
   // const spaceRef = storageRef.child(fileName)
-
   // this.setState({picPath: spaceRef.fullPath})
 
   thumbnailRef.once('value', snap => {

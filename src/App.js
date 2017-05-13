@@ -3,7 +3,7 @@ import { Col, Row, Thumbnail } from 'react-bootstrap';
 import _ from 'lodash';
 import VotingThumbnail from './VotingThumbnail'
 
-import * as thumbnailUtil from './thumbnailUtil'
+// import { getRandomThumbnail } from './thumbnailUtil'
 import * as firebase from 'firebase';
 
 class App extends Component {
@@ -18,13 +18,10 @@ class App extends Component {
   componentDidMount() {
     // const rootRef = firebase.database().ref()
     // const thumbnailRef = rootRef.child('thumbnail')
-
     // const storageRef = firebase.storage().ref();
     // const fileName = '18121094_1499848123390827_3433065930687494666_o.jpg'
     // const spaceRef = storageRef.child(fileName)
-
     // this.setState({picPath: spaceRef.fullPath})
-
     // thumbnailRef.on('value', snap => {
     //   console.log('snapval', snap.val())
     //   _.map(snap.val(), childVal => {
@@ -32,11 +29,38 @@ class App extends Component {
     //   })
     // })
 
-    const randomThumbnails = thumbnailUtil.getRandomThumbnail()
-    // this.setState({
-    //   firstThumbnail: randomThumbnails[0],
-    //   secondThumbnail: randomThumbnails[1]
-    // })
+    this.getRandomThumbnail()
+  }
+
+  getRandomThumbnail () {
+    console.log('inside thumbnailUtil')
+
+    const rootRef = firebase.database().ref()
+    const thumbnailRef = rootRef.child('thumbnail')
+
+    let randomThumbnail1 = {}
+    let randomThumbnail2 = {}
+
+    // const storageRef = firebase.storage().ref();
+    // const fileName = '18121094_1499848123390827_3433065930687494666_o.jpg'
+    // const spaceRef = storageRef.child(fileName)
+    // this.setState({picPath: spaceRef.fullPath})
+
+    thumbnailRef.once('value', snap => {
+      const thumbnailList = snap.val()
+      const totalThumbnails = Object.keys(thumbnailList)
+
+      randomThumbnail1 = thumbnailList[totalThumbnails[totalThumbnails.length ** Math.random() << 0]]
+      do {
+        randomThumbnail2 = thumbnailList[totalThumbnails[totalThumbnails.length ** Math.random() << 0]]
+      } while (randomThumbnail1 === randomThumbnail2)
+
+    }).then(() => {
+      this.setState({
+        firstThumbnail: randomThumbnail1,
+        secondThumbnail: randomThumbnail2
+      })
+    })
 
   }
 
@@ -53,12 +77,12 @@ class App extends Component {
         <Row>
           <Col xs={6} mdPush={2} md={4}>
             <a onClick={() => console.log('clicked1')}>
-              <VotingThumbnail name="billy billy" description="not really" />
+              <VotingThumbnail name={this.state.firstThumbnail.name} description={this.state.firstThumbnail.description} />
             </a>
           </Col>
           <Col xs={6} mdPush={2} md={4}>
             <a onClick={() => console.log('clicked2')}>
-              <VotingThumbnail name="chester" description="chester" />
+              <VotingThumbnail name={this.state.secondThumbnail.name} description={this.state.secondThumbnail.description} />
             </a>
           </Col>
         </Row>
