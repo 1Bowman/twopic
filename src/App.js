@@ -10,7 +10,8 @@ class App extends Component {
     this.state = {
       firstThumbnail: {},
       secondThumbnail: {},
-      allThumbnails: {}
+      allThumbnails: {},
+      selectedThumbnailKeys: []
     }
   }
 
@@ -29,15 +30,27 @@ class App extends Component {
   getRandomThumbnail() {
     const makeValuesAnArray = _.keys(this.state.allThumbnails)
     const shuffledList = _.shuffle(makeValuesAnArray)
+    const grabFirst = shuffledList[0]
+    const grabSecond = shuffledList[1]
 
     this.setState({
-      firstThumbnail: this.state.allThumbnails[shuffledList[0]],
-      secondThumbnail: this.state.allThumbnails[shuffledList[1]]
+      firstThumbnail: this.state.allThumbnails[grabFirst],
+      secondThumbnail: this.state.allThumbnails[grabSecond],
+      selectedThumbnailKeys: [
+        grabFirst,
+        grabSecond
+      ]
     })
   }
 
   handleClick(clickedThumb){
     console.log(clickedThumb)
+    firebase.database().ref('thumbnail/thumbnailList/'+'001').set({
+      name: '~~~',
+      description: '~~~',
+      count: 30+clickedThumb
+    })
+
     this.getRandomThumbnail()
   }
 
@@ -53,12 +66,12 @@ class App extends Component {
         </Row>
         <Row>
           <Col xs={6} mdPush={2} md={4}>
-            <a onClick={() => this.handleClick(1)}>
+            <a onClick={() => this.handleClick(0)}>
               <VotingThumbnail name={this.state.firstThumbnail.name} description={this.state.firstThumbnail.description} />
             </a>
           </Col>
           <Col xs={6} mdPush={2} md={4}>
-            <a onClick={() => this.handleClick(2)}>
+            <a onClick={() => this.handleClick(1)}>
               <VotingThumbnail name={this.state.secondThumbnail.name} description={this.state.secondThumbnail.description} />
             </a>
           </Col>
