@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Col, Row, Thumbnail } from 'react-bootstrap';
 import _ from 'lodash';
 import VotingThumbnail from './VotingThumbnail'
-
-// import { getRandomThumbnail } from './thumbnailUtil'
+// import thumbnailUtil from './thumbnailUtil'
 import * as firebase from 'firebase';
 
 class App extends Component {
@@ -28,7 +27,6 @@ class App extends Component {
     //     this.setState({peopleList: this.state.peopleList.concat(childVal)})
     //   })
     // })
-    console.log('didmount', this.state.firstThumbnail)
     this.getRandomThumbnail()
   }
 
@@ -54,11 +52,10 @@ class App extends Component {
       } while (randomThumbnail1 === randomThumbnail2)
 
     }).then(() => {
-      console.log('inside the .then')
       this.setState({
         firstThumbnail: randomThumbnail1,
         secondThumbnail: randomThumbnail2
-      }, () => {console.log('finaly in the setstate', this.state.firstThumbnail)})
+      })
     })
   }
 
@@ -74,10 +71,14 @@ class App extends Component {
         </Row>
         <Row>
           <Col xs={6} mdPush={2} md={4}>
-            <VotingThumbnail name={this.state.firstThumbnail.name} description={this.state.firstThumbnail.description} />
+            <a onClick={() => console.log('clicked', this.state.firstThumbnail.name)}>
+              <VotingThumbnail name={this.state.firstThumbnail.name} description={this.state.firstThumbnail.description} />
+            </a>
           </Col>
           <Col xs={6} mdPush={2} md={4}>
-            <VotingThumbnail name={this.state.secondThumbnail.name} description={this.state.secondThumbnail.description} />
+            <a onClick={() => console.log('clicked', this.state.secondThumbnail.name)}>
+              <VotingThumbnail name={this.state.secondThumbnail.name} description={this.state.secondThumbnail.description} />
+            </a>
           </Col>
         </Row>
       </div>
