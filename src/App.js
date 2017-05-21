@@ -28,13 +28,11 @@ class App extends Component {
     //     this.setState({peopleList: this.state.peopleList.concat(childVal)})
     //   })
     // })
-
+    console.log('didmount', this.state.firstThumbnail)
     this.getRandomThumbnail()
   }
 
   getRandomThumbnail () {
-    console.log('inside thumbnailUtil')
-
     const rootRef = firebase.database().ref()
     const thumbnailRef = rootRef.child('thumbnail')
 
@@ -56,12 +54,12 @@ class App extends Component {
       } while (randomThumbnail1 === randomThumbnail2)
 
     }).then(() => {
+      console.log('inside the .then')
       this.setState({
         firstThumbnail: randomThumbnail1,
         secondThumbnail: randomThumbnail2
-      })
+      }, () => {console.log('finaly in the setstate', this.state.firstThumbnail)})
     })
-
   }
 
   render() {
@@ -76,14 +74,10 @@ class App extends Component {
         </Row>
         <Row>
           <Col xs={6} mdPush={2} md={4}>
-            <a onClick={() => console.log('clicked1')}>
-              <VotingThumbnail name={this.state.firstThumbnail.name} description={this.state.firstThumbnail.description} />
-            </a>
+            <VotingThumbnail name={this.state.firstThumbnail.name} description={this.state.firstThumbnail.description} />
           </Col>
           <Col xs={6} mdPush={2} md={4}>
-            <a onClick={() => console.log('clicked2')}>
-              <VotingThumbnail name={this.state.secondThumbnail.name} description={this.state.secondThumbnail.description} />
-            </a>
+            <VotingThumbnail name={this.state.secondThumbnail.name} description={this.state.secondThumbnail.description} />
           </Col>
         </Row>
       </div>

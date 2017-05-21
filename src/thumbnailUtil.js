@@ -19,12 +19,9 @@ export getRandomThumbnail async function () {
     const randomThumbnail1 = thumbnailList[totalThumbnails[totalThumbnails.length ** Math.random() << 0]]
     let randomThumbnail2 = {}
     do {
-      console.log('1', randomThumbnail1)
       randomThumbnail2 = thumbnailList[totalThumbnails[totalThumbnails.length ** Math.random() << 0]]
-      console.log('2', randomThumbnail2)
     } while (randomThumbnail1 === randomThumbnail2)
 
-    console.log('final', randomThumbnail1, randomThumbnail2)
     return [randomThumbnail1, randomThumbnail2]
 
   })
