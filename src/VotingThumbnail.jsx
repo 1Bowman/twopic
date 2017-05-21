@@ -19,7 +19,6 @@ class VotingThumbnail extends Component {
   }
 
   updateThumbnail(nextProps) {
-    console.log('updating', nextProps.name)
     this.setState({
       name: nextProps.name,
       description: nextProps.description,
